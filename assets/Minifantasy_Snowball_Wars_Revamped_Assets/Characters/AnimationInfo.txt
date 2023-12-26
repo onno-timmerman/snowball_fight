@@ -1,0 +1,18 @@
+*Frame size* 
+
+- 32x32px: For all the animations.
+
+
+*Frame Duration*
+
+- 100ms: Throw_Diagonal, Throw_Orthogonal, Dmg
+
+- 200ms: Idle, Walk, Gather
+
+
+IMPORTANT:
+
+- You can use the Snowball layers if you want your characters to hold a snowball in their hand during an animation
+- Snowball layers are tagged with "_f" or "_b" at the end of the name.
+- "_f" stands for "front", it should be placed over your character (or be rendered after your character)
+- "_b" Stands for "back", it should be placed under your character (or be rendered before your character)

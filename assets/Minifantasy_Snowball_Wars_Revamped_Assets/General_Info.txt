@@ -1,0 +1,27 @@
++ Snowball_Projectiles folder contains:
+
+- Asset for the projectiles
+- Snowball impact animations
+- Frozen status effect
+
+
++ Characters folder contains:
+
+- 9 Premade characters ready to use
+- Separate layers for everything so you can create your character variations
+- Aseprite files for each animation with organised layers to help you export sprite sheets
+
+
++ Props folder contains:
+
+- A selection of props
+- Christmas tree animated lights
+- Snowfall animated weather effect
+
+
++ Tileset folder contains:
+
+- A selection of snow and grass tiles
+
+
+

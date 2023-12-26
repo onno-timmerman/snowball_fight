@@ -1,0 +1,10 @@
+For all the animations included in this folder
+
+*Frame size* 
+
+- 32x32px
+
+
+*Frame Duration*
+
+- 100ms

@@ -1,0 +1,249 @@
+[gd_scene load_steps=32 format=3 uid="uid://08n1lgxxkvko"]
+
+[ext_resource type="Texture2D" uid="uid://b5dfqy2hlotme" path="res://assets/Minifantasy_Snowball_Wars_Revamped_Assets/_Snowball_Projectiles/Impacts/S_Snowball_Impact.png" id="1_0dokj"]
+[ext_resource type="Texture2D" uid="uid://ch0qgbpfiif3" path="res://assets/Minifantasy_Snowball_Wars_Revamped_Assets/_Snowball_Projectiles/Impacts/L_Snowball_Impact.png" id="1_k6vxn"]
+[ext_resource type="Texture2D" uid="uid://njxvdk7t5jn" path="res://assets/Minifantasy_Snowball_Wars_Revamped_Assets/_Snowball_Projectiles/Snowball_Projectiles/L_Snowball_Projectile.png" id="1_tnajx"]
+[ext_resource type="Texture2D" uid="uid://gr70auy5p28r" path="res://assets/Minifantasy_Snowball_Wars_Revamped_Assets/_Snowball_Projectiles/Snowball_Projectiles/S_Snowball_Projectile.png" id="4_g21mk"]
+
+[sub_resource type="GDScript" id="GDScript_5i16y"]
+script/source = "extends Area2D
+@export var speed:float = 100
+@export var velocity = Vector2()
+@export var slowdown_rate = 0.95
+var distance = 100
+var traveled_distance = 0
+var direction = Vector2(1,0)
+
+@onready var anim = $AnimatedSprite2D
+
+var vector_right = Vector2(1, 0) # Pointing right
+var vector_up = Vector2(0, -1)   # Pointing up
+var vector_left = Vector2(-1, 0) # Pointing left
+var vector_down = Vector2(0, 1)  # Pointing down
+
+func _ready():
+	velocity = direction * speed
+
+func _process(delta):
+	global_position += velocity * delta
+	traveled_distance += velocity.length() * delta
+	if traveled_distance > distance:
+		velocity = Vector2.ZERO
+		anim.play(\"impact_small\")
+		if anim.frame == 3:
+			queue_free()
+	else:
+		anim.animation = \"snowball_small\"
+		anim.frame = get_direction_from_vector()
+
+
+func get_direction_from_vector():
+	var angle = rad_to_deg(direction.angle())  # Convert the angle to degrees
+	angle = fmod(angle + 360, 335)  # Normalize the angle to be between 0 and 360 degrees
+	var region = int(angle / 45)  # Determine the region
+	return region
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x38dp"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31dc2"]
+atlas = ExtResource("1_k6vxn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nohx2"]
+atlas = ExtResource("1_k6vxn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7evm"]
+atlas = ExtResource("1_k6vxn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1eym0"]
+atlas = ExtResource("1_k6vxn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aer0f"]
+atlas = ExtResource("1_0dokj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lslos"]
+atlas = ExtResource("1_0dokj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dgg7"]
+atlas = ExtResource("1_0dokj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_322a4"]
+atlas = ExtResource("1_0dokj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b6j3"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1krhn"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_na2is"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn1ht"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8foi8"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dou5"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgv46"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icss4"]
+atlas = ExtResource("1_tnajx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbggq"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inp6s"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muoax"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50ix0"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a35gp"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lehcu"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chory"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32vxq"]
+atlas = ExtResource("4_g21mk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0re1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31dc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nohx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7evm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1eym0")
+}],
+"loop": true,
+"name": &"impact_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aer0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lslos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dgg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_322a4")
+}],
+"loop": true,
+"name": &"impact_small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b6j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1krhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_na2is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn1ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8foi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dou5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgv46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icss4")
+}],
+"loop": true,
+"name": &"snowball_large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbggq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inp6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muoax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ix0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a35gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lehcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chory")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32vxq")
+}],
+"loop": true,
+"name": &"snowball_small",
+"speed": 5.0
+}]
+
+[node name="snowball" type="Area2D"]
+script = SubResource("GDScript_5i16y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x38dp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0re1j")
+animation = &"impact_small"
